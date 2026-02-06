@@ -1,0 +1,19 @@
+# Exclude data & outputs (large, runtime-mounted)
+data/
+outputs/
+
+# Exclude git metadata
+.git/
+Isaac-GR00T/.git/
+
+# Exclude nested external dependencies (not needed for training)
+Isaac-GR00T/external_dependencies/
+
+# Exclude docs and non-essential files
+Isaac-GR00T/docs/
+Isaac-GR00T/.github/
+Isaac-GR00T/docker/
+
+# Python cache
+**/__pycache__/
+**/*.pyc

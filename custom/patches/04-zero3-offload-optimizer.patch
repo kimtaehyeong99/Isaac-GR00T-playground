@@ -1,0 +1,18 @@
+diff --git a/gr00t/configs/deepspeed/zero3_config.json b/gr00t/configs/deepspeed/zero3_config.json
+index e6162b3..0e5b969 100644
+--- a/gr00t/configs/deepspeed/zero3_config.json
++++ b/gr00t/configs/deepspeed/zero3_config.json
+@@ -25,7 +25,11 @@
+       "stage3_param_persistence_threshold": "auto",
+       "stage3_max_live_parameters": 1e9,
+       "stage3_max_reuse_distance": 1e9,
+-      "stage3_gather_16bit_weights_on_model_save": true
++      "stage3_gather_16bit_weights_on_model_save": true,
++      "offload_optimizer": {
++        "device": "cpu",
++        "pin_memory": true
++      }
+     }
+   }
+   
+\ No newline at end of file

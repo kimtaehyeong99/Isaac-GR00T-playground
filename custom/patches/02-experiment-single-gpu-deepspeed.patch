@@ -1,0 +1,14 @@
+diff --git a/gr00t/experiment/experiment.py b/gr00t/experiment/experiment.py
+index 6a9ad34..3584b25 100755
+--- a/gr00t/experiment/experiment.py
++++ b/gr00t/experiment/experiment.py
+@@ -176,7 +176,8 @@ def run(config: Config):
+     processor.save_pretrained(processor_dir)
+ 
+     # deepspeed config
+-    if config.training.num_gpus > 1 and not config.training.use_ddp:
++    # Enable DeepSpeed for single GPU too when using ZeRO-3 with CPU offload for memory efficiency
++    if not config.training.use_ddp:
+         deepspeed_config = config.get_deepspeed_config()
+     else:
+         deepspeed_config = None

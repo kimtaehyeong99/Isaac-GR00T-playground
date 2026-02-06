@@ -1,0 +1,16 @@
+diff --git a/gr00t/model/gr00t_n1d6/processing_gr00t_n1d6.py b/gr00t/model/gr00t_n1d6/processing_gr00t_n1d6.py
+index 214ae30..01aa794 100755
+--- a/gr00t/model/gr00t_n1d6/processing_gr00t_n1d6.py
++++ b/gr00t/model/gr00t_n1d6/processing_gr00t_n1d6.py
+@@ -514,6 +514,11 @@ class Gr00tN1d6Processor(BaseProcessor):
+                 "random_rotation_angle",
+                 "color_jitter_params",
+                 "use_relative_action",
++                "use_albumentations",
++                "image_crop_size",
++                "image_target_size",
++                "shortest_image_edge",
++                "crop_fraction",
+             ]
+             for key in override_keys:
+                 if key in kwargs:

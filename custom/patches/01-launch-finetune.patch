@@ -1,0 +1,24 @@
+diff --git a/gr00t/experiment/launch_finetune.py b/gr00t/experiment/launch_finetune.py
+index f5deb7e..13f27c2 100644
+--- a/gr00t/experiment/launch_finetune.py
++++ b/gr00t/experiment/launch_finetune.py
+@@ -69,8 +69,19 @@ if __name__ == "__main__":
+     config.model.backbone_trainable_params_fp32 = True
+     config.model.use_relative_action = True
+ 
++    # Use torchvision transforms instead of albumentations to handle different camera aspect ratios
++    # albumentations SmallestMaxSize preserves aspect ratio, causing size mismatch when stacking
++    # torchvision LetterBoxTransform pads to square first, ensuring uniform output sizes
++    config.model.use_albumentations_transforms = False
++    config.model.shortest_image_edge = None
++    config.model.crop_fraction = None
++    config.model.image_crop_size = (224, 224)
++    config.model.image_target_size = (256, 256)
++
+     config.training.start_from_checkpoint = ft_config.base_model_path
+     config.training.optim = "adamw_torch"
++    config.training.gradient_checkpointing = True  # Enable gradient checkpointing to save GPU memory
++    config.training.deepspeed_stage = 3  # Use ZeRO-3 with optimizer offload for memory efficiency
+     config.training.global_batch_size = ft_config.global_batch_size
+     config.training.dataloader_num_workers = ft_config.dataloader_num_workers
+     config.training.learning_rate = ft_config.learning_rate
